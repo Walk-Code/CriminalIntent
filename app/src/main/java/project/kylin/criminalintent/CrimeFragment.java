@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import butterknife.Bind;
@@ -45,6 +48,7 @@ public class CrimeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,10 @@ public class CrimeFragment extends Fragment {
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
+    public void updateDate() {
+       // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        crimeDate.setText(mCrime.getDate().toString());
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
@@ -74,7 +82,7 @@ public class CrimeFragment extends Fragment {
             }
         });
         crimeTitle.setText(mCrime.getmTitle());
-        crimeDate.setText(mCrime.getDate().toString());
+        updateDate();
         //crimeDate.setEnabled(false);
         crimeDate.setOnClickListener(new View.OnClickListener(){
 
@@ -103,11 +111,11 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != Activity.RESULT_OK) return;
+        if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setmDate(date);
-            crimeDate.setText(mCrime.getDate().toString());
+            updateDate();
         }
     }
 
