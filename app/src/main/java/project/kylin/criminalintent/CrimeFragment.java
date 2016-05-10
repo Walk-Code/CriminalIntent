@@ -59,7 +59,7 @@ public class CrimeFragment extends Fragment {
 
     public void updateDate() {
        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        crimeDate.setText(mCrime.getDate().toString());
+        crimeDate.setText(mCrime.getDate().toString()+"");
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,7 +113,9 @@ public class CrimeFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == REQUEST_DATE) {
-            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+           // Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+       // Log.d("CrimeFragment","Time:"+date.toString());
             mCrime.setmDate(date);
             updateDate();
         }

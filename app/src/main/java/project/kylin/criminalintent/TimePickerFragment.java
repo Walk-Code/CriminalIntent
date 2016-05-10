@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -35,11 +36,14 @@ public class TimePickerFragment extends DialogFragment{
 
     private void sendResult(int resultCode) {
         if (getTargetFragment() == null) {
+            Log.d("CrimeFragment","getTargetFragment is null");
             return;
         }
+        Log.d("CrimeFragment","has a getTargetFragment");
         Intent i = new Intent();
         i.putExtra(EXTRA_TIME,mDate);
         getTargetFragment().onActivityResult(getTargetRequestCode(),resultCode,i);
+
     }
 
     @Override
@@ -49,6 +53,9 @@ public class TimePickerFragment extends DialogFragment{
         calendar.setTime(mDate);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
         View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_time,null);
         TimePicker timePicker = (TimePicker) v.findViewById(R.id.dialog_date_timepicker);
         timePicker.setIs24HourView(true);
@@ -57,7 +64,7 @@ public class TimePickerFragment extends DialogFragment{
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                mDate = new GregorianCalendar(0,0,0,hourOfDay,minute).getTime();
+                mDate = new GregorianCalendar(year,month,day,hourOfDay,minute).getTime();
                 getArguments().putSerializable(EXTRA_TIME,mDate);
             }
         });

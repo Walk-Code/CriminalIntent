@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,8 +67,9 @@ public class DatePickerFragment extends DialogFragment {
                 //sendResult(Activity.RESULT_OK);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 TimePickerFragment timePickerFragment = TimePickerFragment.newInstance(mDate);
-                timePickerFragment.setTargetFragment(DatePickerFragment.this,0);
+                timePickerFragment.setTargetFragment(getTargetFragment(),0);
                 timePickerFragment.show(fm,"time");
+                //fm.beginTransaction().remove(DatePickerFragment.this).commit();
             }
         }).create();
     }
