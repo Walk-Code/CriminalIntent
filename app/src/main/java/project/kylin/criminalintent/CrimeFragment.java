@@ -2,13 +2,16 @@ package project.kylin.criminalintent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -64,6 +67,12 @@ public class CrimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            if (null != NavUtils.getParentActivityName(getActivity())){
+                getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, v);
         crimeTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -118,6 +127,19 @@ public class CrimeFragment extends Fragment {
        // Log.d("CrimeFragment","Time:"+date.toString());
             mCrime.setmDate(date);
             updateDate();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (null != NavUtils.getParentActivityName(getActivity())) {
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

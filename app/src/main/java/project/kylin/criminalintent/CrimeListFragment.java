@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,6 +32,7 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         getActivity().setTitle(R.string.crime_title);
         mCrimes = CrimeLab.get(getActivity()).getCrimes();
        // ArrayAdapter<Crime> adapter = new ArrayAdapter<Crime>(getActivity(), android.R.layout.simple_list_item_1, mCrimes);
@@ -57,6 +61,30 @@ public class CrimeListFragment extends ListFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CRIME) {
 
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_crime_list,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_new_crime:
+                Crime crime = new Crime();
+                CrimeLab.get(getActivity()).addCrime(crime);
+                Intent i = new Intent(getActivity(),CrimePageActivity.class);
+                i.putExtra(CrimeFragment.EXTRA_CRIME_ID,crime.getmId());
+                startActivityForResult(i,0);
+                return true;
+            case R.id.menu_item_show_subtitle:
+                getActivity().getActionBar().setSubtitle(R.string.subtitle);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

@@ -3,6 +3,7 @@ package project.kylin.criminalintent.model;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -16,12 +17,14 @@ public class CrimeLab {
     public CrimeLab(Context mAppContext) {
         this.mAppContext = mAppContext;
         mCrimes = new ArrayList<Crime>();
-        for (int i = 0;i < 100; i++) {
-            Crime c = new Crime();
+       /* for (int i = 0;i < 100;i++) {
+            Crime c= new Crime();
             c.setmTitle("Crime #"+i);
+            c.setmDate(new Date());
             c.setmSolved(i % 2 == 0);
             mCrimes.add(c);
-        }
+        }*/
+
     }
 
     public static CrimeLab get(Context c){
@@ -31,6 +34,9 @@ public class CrimeLab {
         return sCrimeLab;
     }
 
+    public void addCrime(Crime c){
+        mCrimes.add(c);
+    }
     public ArrayList<Crime> getCrimes(){
         return mCrimes;
     }
