@@ -1,15 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        -->
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
+        <!-- Navigation bar color -->
+        <item name="android:colorPrimary" tools:targetApi="lollipop">@color/accent_material_dark</item>
+        <!-- status bar color Valid only in api21 and above -->
+        <item name="android:statusBarColor" tools:targetApi="lollipop"></item>
     </style>
 
 </resources>
