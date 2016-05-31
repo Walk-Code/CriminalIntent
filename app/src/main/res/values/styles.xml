@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
         <!-- Navigation bar color -->
         <item name="android:colorPrimary" tools:targetApi="lollipop">@color/accent_material_dark</item>
-        <!-- status bar color Valid only in api21 and above -->
-        <item name="android:statusBarColor" tools:targetApi="lollipop"></item>
+       <!-- &lt;!&ndash; status bar color Valid only in api21 and above &ndash;&gt;
+        <item name="android:statusBarColor" tools:targetApi="lollipop"></item>-->
     </style>
 
 </resources>
