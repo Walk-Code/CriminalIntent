@@ -67,13 +67,15 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime_list,menu);
+       // inflater.inflate(R.menu.fragment_crime_list,menu);
+        inflater.inflate(R.menu.base_toolbar_menu,menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_new_crime:
+            //case R.id.menu_item_new_crime:
+            case R.id.action_add:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent i = new Intent(getActivity(),CrimePageActivity.class);

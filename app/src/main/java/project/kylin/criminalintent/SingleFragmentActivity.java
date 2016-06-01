@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -39,16 +40,24 @@ public abstract class SingleFragmentActivity extends AppCompatActivity{
 
                 switch (item.getItemId()) {
                     case R.id.action_add:
-                         Toast.makeText(SingleFragmentActivity.this,"click",Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(SingleFragmentActivity.this,"click",Toast.LENGTH_SHORT).show();
+                        return true;
                     case R.id.action_notification:
                         Toast.makeText(SingleFragmentActivity.this,"click notification",Toast.LENGTH_SHORT).show();
-
+                        return true;
                     case R.id.action_search:
                         Toast.makeText(SingleFragmentActivity.this,"click search",Toast.LENGTH_SHORT).show();
+                        return true;
                 }
 
-                return true;
+                return false;
+            }
+        });
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SingleFragmentActivity.this,"Navigation",Toast.LENGTH_SHORT).show();
             }
         });
 
