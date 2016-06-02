@@ -38,6 +38,8 @@ public class CrimeListFragment extends ListFragment {
        // ArrayAdapter<Crime> adapter = new ArrayAdapter<Crime>(getActivity(), android.R.layout.simple_list_item_1, mCrimes);
         CrimeAdapter adapter = new CrimeAdapter(mCrimes);
         setListAdapter(adapter);
+
+
     }
 
     @Override
