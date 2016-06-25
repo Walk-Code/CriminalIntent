@@ -11,6 +11,8 @@ public class CrimeListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new CrimeListFragment();
+
+        //return new CrimeListFragment();
+        return new CrimeListFragment2();
     }
 }

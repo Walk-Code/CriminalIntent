@@ -1,6 +1,5 @@
 package project.kylin.criminalintent;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import project.kylin.criminalintent.adapter.CrimeListAdapter;
 import project.kylin.criminalintent.model.Crime;
 
@@ -24,9 +22,8 @@ import project.kylin.criminalintent.model.Crime;
  * Created by jianqi on 2016/6/22.
  */
 public class CrimeListFragment2 extends Fragment {
-    @Bind(R.id.crim_list)
-    RecyclerView crimList;
-    private RecyclerView recyclerView;
+
+    RecyclerView recyclerView;
     private CrimeListAdapter crimeListAdapter;
     private List<Crime> list = new ArrayList<Crime>();
 
@@ -36,19 +33,14 @@ public class CrimeListFragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         crimeListAdapter = new CrimeListAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        Log.i("CrimeListFragment", (layoutManager == null) + "");
+        recyclerView = (RecyclerView) view.findViewById(R.id.crim_list);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(crimeListAdapter);
 
         text();
-        ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     public void text() {
@@ -58,4 +50,6 @@ public class CrimeListFragment2 extends Fragment {
         list.add(crime);
         crimeListAdapter.notifyDataSetChanged();
     }
+
+
 }
